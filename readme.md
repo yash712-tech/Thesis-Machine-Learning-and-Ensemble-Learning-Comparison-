@@ -1,57 +1,27 @@
-Dataset Overview
-This repository provides NumPy (.npy) files containing feature layers (X variables) and corresponding classification maps (Y variables) for a flood detection project. Each file stores a specific slice of the data, ready to be loaded directly in Python for model training, validation, or inference.
+# Flood Detection Dataset
 
-File Descriptions
-X_best3.npy
+This repository contains NumPy (`.npy`) files for a flood detection task, including essential feature layers (**X**) and corresponding flood maps (**Y**). The data is derived from satellite imagery and is intended for use in training and evaluating machine learning models focused on flood classification or segmentation.
 
-Dimensions: The file typically has the shape (n, 3, H, W) or (n, H, W, 3) depending on how you stacked the features.
+## Files and Structure
 
-Contents:
+- **X_best3.npy**  
+  - **Shape**: Typically `(n, 3, H, W)` or `(n, H, W, 3)` (depending on your model requirements).
+  - **Contents**:  
+    1. **Coh VV** – Coherence in VV polarization  
+    2. **VVPost** – Post-flood VV band  
+    3. **VVPre** – Pre-flood VV band  
+  - These three layers represent the “best” feature combination for flood detection, identified through model experiments.
 
-Coh_VV – Coherence in VV polarization
+- **Y_*.npy** (e.g., `Y_data.npy`, adjust name to match your actual file)  
+  - **Shape**: Usually `(n, H, W)` for segmentation tasks or `(n,)` for classification.  
+  - **Contents**:  
+    - Binary or multi-class label maps indicating flood-affected areas (1) vs. non-flooded areas (0).  
 
-VVPost – Post-flood VV
+> **Tip**: Confirm exact file names and shapes in your local environment—this is just an example.
 
-VVPre – Pre-flood VV
+## Usage Instructions
 
-These three layers represent the “best” performing feature set for the flood detection task.
-
-Y_* (e.g., Y_data.npy)
-
-Dimensions: Usually (n, H, W) for segmentation labels, or (n,) for classification, depending on your task.
-
-Contents:
-
-Binary or multi-class map indicating whether a pixel/region is flooded (1) or not flooded (0), or potentially more classes.
-
-Note: Replace the above placeholders (e.g., Y_data.npy, (n, 3, H, W)) with the exact names and shapes you use.
-
-Usage
-Clone or download this repository to your local machine.
-
-Load the NumPy arrays in Python:
-
-python
-Copy
-Edit
-import numpy as np
-
-X_best3 = np.load("X_best3.npy")  # Shape: (n, 3, H, W)
-Y_data  = np.load("Y_data.npy")   # Shape: (n, H, W)
-Integrate with your pipeline:
-
-Pass X_best3 into your model or data preprocessing pipeline.
-
-Use Y_data for training labels, validation accuracy checks, or generating flood maps.
-
-Data Format Details
-Coordinate System: If applicable, specify how the image coordinates map to geospatial references (e.g., Sentinel-1 or Sentinel-2 lat/lon grids).
-
-Scaling/Normalization: Mention any preprocessing steps (like normalization, standardization, or clipping of input values).
-
-Missing Values: If certain regions are masked due to cloud cover or sensor issues, indicate how these are represented (e.g., zero or NaN).
-
-Attribution and Licensing
-If the data is based on publicly available satellite imagery or from a specific project, provide appropriate attribution and licensing details here.
-
-Clarify usage rights and any restrictions on data distribution.
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
